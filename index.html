@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="es" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TurLux Games & Software S.A. | Software y Videojuegos Nativos para Linux</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        turlux: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            dark: '#0a0d14',
+                            card: '#121723',
+                            border: '#1f293d',
+                            accent: '#8b5cf6',
+                            emerald: '#10b981'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'Fira Code', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Font Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body class="selection:bg-purple-500 selection:text-white">
+
+    <!-- Background Ambient Glows -->
+    <div class="fixed top-0 left-1/4 w-[600px] h-[600px] hero-glow-1 pointer-events-none -z-10 blur-3xl"></div>
+    <div class="fixed top-1/3 right-10 w-[500px] h-[500px] hero-glow-2 pointer-events-none -z-10 blur-3xl"></div>
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-50 glass-panel border-b border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 to-emerald-400 flex items-center justify-center text-slate-950 font-black text-xl shadow-lg shadow-purple-900/30 group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-brands fa-linux text-2xl text-slate-950"></i>
+                </div>
+                <div>
+                    <span class="font-extrabold text-xl tracking-tight text-white flex items-center gap-1.5">
+                        TurLux <span class="text-xs px-2 py-0.5 rounded bg-purple-950/80 text-purple-300 border border-purple-500/30">Games & SW</span>
+                    </span>
+                    <span class="text-[10px] text-slate-400 block tracking-widest uppercase font-mono">S.A. &bull; Linux Native</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+                <a href="#products" class="hover:text-emerald-400 transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-boxes-stacked text-xs opacity-70"></i> Catálogo
+                </a>
+                <a href="#security" class="hover:text-purple-400 transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-shield-halved text-xs opacity-70"></i> Seguridad
+                </a>
+                <a href="#ecosystem" class="hover:text-emerald-400 transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-terminal text-xs opacity-70"></i> Instalación
+                </a>
+                <a href="#about" class="hover:text-purple-400 transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-building text-xs opacity-70"></i> Empresa
+                </a>
+            </nav>
+
+            <!-- Actions & Status -->
+            <div class="flex items-center gap-4">
+                <div class="hidden sm:flex items-center gap-2 text-xs font-mono px-3 py-1.5 rounded-full bg-slate-900/90 border border-slate-700/60 text-slate-300">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse-emerald"></span>
+                    <span>Repositorios Online</span>
+                </div>
+
+                <a href="#products" class="bg-gradient-to-r from-purple-600 to-emerald-500 hover:from-purple-500 hover:to-emerald-400 text-white font-semibold text-sm px-4 py-2 rounded-lg transition-all duration-300 shadow-md shadow-purple-900/20 hover:shadow-purple-700/40 flex items-center gap-2">
+                    <i class="fa-solid fa-download text-xs"></i>
+                    <span>Explorar Software</span>
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="md:hidden text-slate-300 hover:text-white text-xl p-2">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden glass-panel border-t border-slate-800 px-4 py-6 space-y-4">
+            <a href="#products" class="mobile-nav-link block text-slate-200 hover:text-emerald-400 font-medium text-lg py-1">Catálogo de Productos</a>
+            <a href="#security" class="mobile-nav-link block text-slate-200 hover:text-purple-400 font-medium text-lg py-1">Seguridad & Firma Digital</a>
+            <a href="#ecosystem" class="mobile-nav-link block text-slate-200 hover:text-emerald-400 font-medium text-lg py-1">Comandos de Instalación</a>
+            <a href="#about" class="mobile-nav-link block text-slate-200 hover:text-purple-400 font-medium text-lg py-1">Acerca de TurLux S.A.</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative pt-16 pb-20 md:pt-28 md:pb-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-950/60 border border-purple-500/30 text-purple-300 text-xs font-semibold mb-8 backdrop-blur-md">
+                <i class="fa-brands fa-linux text-emerald-400 text-sm"></i>
+                <span>Desarrollo 100% Nativo para GNU/Linux</span>
+                <span class="bg-purple-800/60 text-purple-200 text-[10px] px-2 py-0.5 rounded-full font-mono">Vulkan 1.3</span>
+            </div>
+
+            <!-- Main Heading -->
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight max-w-5xl mx-auto">
+                El futuro de los videojuegos y herramientas <span class="text-gradient">nativas para Linux</span>
+            </h1>
+
+            <p class="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto mb-10 leading-relaxed font-normal">
+                En <strong>TurLux Games & Software S.A.</strong> diseñamos experiencias interactivas y suites de ingeniería optimizadas desde el núcleo para sistemas operativos Linux. Potencia, seguridad firmada y rendimiento gráfico sin intermediarios.
+            </p>
+
+            <!-- Hero CTA Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto mb-16">
+                <a href="#products" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-base transition-all duration-300 shadow-xl shadow-purple-950/80 flex items-center justify-center gap-3 group">
+                    <i class="fa-solid fa-gamepad text-lg group-hover:scale-110 transition-transform"></i>
+                    Ver Productos Nativos
+                </a>
+                <a href="#ecosystem" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700/80 font-bold text-base transition-all duration-300 flex items-center justify-center gap-3">
+                    <i class="fa-solid fa-terminal text-emerald-400 font-mono"></i>
+                    Agregar Repositorio APT/Flatpak
+                </a>
+            </div>
+
+            <!-- Mini Tech Stats Bar -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto pt-8 border-t border-slate-800/80 text-left">
+                <div class="p-4 rounded-xl bg-slate-900/40 border border-slate-800">
+                    <div class="text-xs text-slate-400 font-mono mb-1">COMPATIBILIDAD</div>
+                    <div class="text-lg font-bold text-slate-200">Ubuntu, Mint, Zorin, Arch</div>
+                </div>
+                <div class="p-4 rounded-xl bg-slate-900/40 border border-slate-800">
+                    <div class="text-xs text-slate-400 font-mono mb-1">APIS GRÁFICAS</div>
+                    <div class="text-lg font-bold text-emerald-400">Vulkan & OpenGL Direct</div>
+                </div>
+                <div class="p-4 rounded-xl bg-slate-900/40 border border-slate-800">
+                    <div class="text-xs text-slate-400 font-mono mb-1">SEGURIDAD FIRMADA</div>
+                    <div class="text-lg font-bold text-purple-400">GPG Key 4096-bit</div>
+                </div>
+                <div class="p-4 rounded-xl bg-slate-900/40 border border-slate-800">
+                    <div class="text-xs text-slate-400 font-mono mb-1">DISTRIBUCIÓN</div>
+                    <div class="text-lg font-bold text-slate-200">Flatpak / AppImage / .deb</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCT CATALOG SECTION -->
+    <section id="products" class="py-20 relative border-t border-slate-800/60 bg-slate-950/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Header -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                <div>
+                    <div class="text-xs font-mono text-emerald-400 uppercase tracking-widest mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-layer-group"></i> Catálogo Oficial de Productos
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Software y Videojuegos Destacados</h2>
+                </div>
+
+                <!-- Filters & Search -->
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                    <!-- Filter Pills -->
+                    <div class="inline-flex p-1 rounded-xl bg-slate-900 border border-slate-800 text-xs font-medium text-slate-400">
+                        <button class="category-btn active px-3 py-1.5 rounded-lg transition-all text-white bg-purple-600" data-category="all">Todos</button>
+                        <button class="category-btn px-3 py-1.5 rounded-lg transition-all hover:text-white" data-category="game">Juegos</button>
+                        <button class="category-btn px-3 py-1.5 rounded-lg transition-all hover:text-white" data-category="devtools">DevTools</button>
+                        <button class="category-btn px-3 py-1.5 rounded-lg transition-all hover:text-white" data-category="security">Seguridad</button>
+                    </div>
+
+                    <!-- Search Input -->
+                    <div class="relative">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
+                        <input type="text" id="searchInput" placeholder="Buscar software o motor..." class="w-full sm:w-48 bg-slate-900 border border-slate-800 text-slate-200 text-xs rounded-xl pl-8 pr-3 py-2.5 focus:outline-none focus:border-purple-500 transition-colors">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div id="productGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+                <!-- Product Card 1: TurLux OS Engine -->
+                <div class="product-card glass-card rounded-2xl p-6 sm:p-8 flex flex-col justify-between" data-category="devtools" data-name="turlux gameengine motor grafico">
+                    <div>
+                        <div class="flex items-center justify-between gap-4 mb-4">
+                            <span class="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-emerald-950/80 text-emerald-400 border border-emerald-500/30 flex items-center gap-1.5">
+                                <i class="fa-solid fa-microchip text-[10px]"></i> Motor Gráfico Nativo
+                            </span>
+                            <span class="text-xs text-slate-500 font-mono">v3.4.2 LTS</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 mb-4">
+                            <div class="w-14 h-14 rounded-xl bg-purple-900/40 border border-purple-500/30 flex items-center justify-center text-purple-400 text-2xl flex-shrink-0">
+                                <i class="fa-solid fa-cubes"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-white mb-1 hover:text-purple-300 transition-colors cursor-pointer" onclick="openProductModal('engine')">TurLux OS / GameEngine</h3>
+                                <p class="text-xs text-slate-400 font-mono">Framework & Entorno de Compilación Nativo</p>
+                            </div>
+                        </div>
+
+                        <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+                            Motor gráfico de alto rendimiento desarrollado específicamente para arquitecturas Linux x86_64 y ARM64. Incluye pipeline multitarea Vulkan 1.3 directo sin capas de emulación y gestor de memoria optimizado para kernel RT.
+                        </p>
+
+                        <!-- Tech Specs Pills -->
+                        <div class="flex flex-wrap gap-2 mb-6 text-xs">
+                            <span class="px-2.5 py-1 rounded-md bg-slate-900/90 border border-slate-800 text-slate-300 font-mono">Vulkan 1.3</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-900/90 border border-slate-800 text-slate-300 font-mono">C++20 / Rust</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-900/90 border border-slate-800 text-slate-300 font-mono">Wayland & X11</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-900/90 border border-slate-800 text-slate-300 font-mono">Zero-Latency Audio</span>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center gap-3">
+                        <button onclick="openProductModal('engine')" class="w-full sm:w-auto flex-1 py-2.5 px-4 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs transition-colors flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-download"></i> Descargar Flatpak / .deb
+                        </button>
+                        <button onclick="copyRepoCommand('sudo apt install turlux-gameengine')" class="w-full sm:w-auto py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700/80 text-slate-300 font-mono text-xs transition-colors flex items-center justify-center gap-2" title="Copiar comando APT">
+                            <i class="fa-solid fa-terminal text-emerald-400"></i> `apt install`
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product Card 2: StellarBlade -->
+                <div class="product-card glass-card rounded-2xl p-6 sm:p-8 flex flex-col justify-between" data-category="game" data-name="stellarblade videojuego sci-fi rpg linux">
+                    <div>
+                        <div class="flex items-center justify-between gap-4 mb-4">
+                            <span class="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-purple-950/80 text-purple-300 border border-purple-500/30 flex items-center gap-1.5">
+                                <i class="fa-solid fa-gamepad text-[10px]"></i> Videojuego AAA Nativo
+                            </span>
+                            <span class="text-xs text-amber-400 font-semibold font-mono flex items-center gap-1">
+                                <i class="fa-solid fa-star text-[10px]"></i> 4.9 / 5.0
+                            </span>
+                        </div>
+
+                        <div class="flex items-start gap-4 mb-4">
+                            <div class="w-14 h-14 rounded-xl bg-emerald-900/40 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl flex-shrink-0">
+                                <i class="fa-solid fa-jet-fighter-up"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-white mb-1 hover:text-emerald-300 transition-colors cursor-pointer" onclick="openProductModal('stellarblade')">StellarBlade: Linux Warfare</h3>
+                                <p class="text-xs text-slate-400 font-mono">Sci-Fi Action RPG & Cyber Combat</p>
+                            </div>
+                        </div>
+
+                        <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+                            Videojuego RPG de acción futurista en mundo abierto creado sobre TurLux Engine. Diseñado desde cero para exprimir al máximo controladores nativos de Linux, Steam Deck y aceleración Vulkan multihilo.
+                        </p>
+
+                        <!-- Tech Specs Pills -->
+                        <div class="flex flex-wrap gap-2 mb-6 text-xs">
+                            <span class="px-2.5 py-1 rounded-md bg-slate-900/90 border border-slate-800 text-slate-300 font-mono">Native Linux Binary</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-900/90 border border-slate-800 text-slate-300 font-mono">60+ FPS 4K</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-900/90 border border-slate-800 text-slate-300 font-mono">Steam Deck Verified</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-900/90 border border-slate-800 text-slate-300 font-mono">Gamepad Linux Input</span>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center gap-3">
+                        <button onclick="openProductModal('stellarblade')" class="w-full sm:w-auto flex-1 py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition-colors flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-cart-shopping"></i> Obtener para Linux
+                        </button>
+                        <button onclick="openProductModal('stellarblade')" class="w-full sm:w-auto py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700/80 text-slate-300 text-xs transition-colors flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-circle-info"></i> Detalles
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product Card 3: PinguForge Studio -->
+                <div class="product-card glass-card rounded-2xl p-6 sm:p-8 flex flex-col justify-between" data-category="devtools" data-name="pinguforge studio ide assets editor linux">
+                    <div>
+                        <div class="flex items-center justify-between gap-4 mb-4">
+                            <span class="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-blue-950/80 text-blue-300 border border-blue-500/30 flex items-center gap-1.5">
+                                <i class="fa-solid fa-code text-[10px]"></i> IDE & Suite Digital
+                            </span>
+                            <span class="text-xs text-slate-500 font-mono">v2.1.0 Open-Core</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 mb-4">
+                            <div class="w-14 h-14 rounded-xl bg-blue-900/40 border border-blue-500/30 flex items-center justify-center text-blue-400 text-2xl flex-shrink-0">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-white mb-1 hover:text-blue-300 transition-colors cursor-pointer" onclick="openProductModal('pinguforge')">PinguForge Studio</h3>
+                                <p class="text-xs text-slate-400 font-mono">Entorno Integrado de Modelado y Shader Graph</p>
+                            </div>
+                        </div>
+
+                        <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+                            Suite completa de desarrollo visual de assets 2D/3D, edición de shaders HLSL/GLSL y profiling de rendimiento de CPU/GPU integrada para creadores en distribuciones Linux.
+                        </p>
+
+                        <!-- Tech Specs Pills -->
+                        <div class="flex flex-wrap gap-2 mb-6 text-xs">
+                            <span class="px-2.5 py-1 rounded-md bg-slate-900/90 border border-slate-800 text-slate-300 font-mono">GTK4 / Libadwaita</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-900/90 border border-slate-800 text-slate-300 font-mono">Node Shader Editor</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-900/90 border border-slate-800 text-slate-300 font-mono">Git Native Integration</span>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center gap-3">
+                        <button onclick="openProductModal('pinguforge')" class="w-full sm:w-auto flex-1 py-2.5 px-4 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs transition-colors flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-download"></i> Descargar AppImage
+                        </button>
+                        <button onclick="copyRepoCommand('flatpak install flathub com.turlux.PinguForge')" class="w-full sm:w-auto py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700/80 text-slate-300 font-mono text-xs transition-colors flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-box-open text-purple-400"></i> Flatpak
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product Card 4: CyberShield Linux -->
+                <div class="product-card glass-card rounded-2xl p-6 sm:p-8 flex flex-col justify-between" data-category="security" data-name="cybershield linux ciberseguridad parches auditoria servidores">
+                    <div>
+                        <div class="flex items-center justify-between gap-4 mb-4">
+                            <span class="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-rose-950/80 text-rose-300 border border-rose-500/30 flex items-center gap-1.5">
+                                <i class="fa-solid fa-user-shield text-[10px]"></i> Enterprise Security
+                            </span>
+                            <span class="text-xs text-slate-500 font-mono">v4.0 Enterprise</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 mb-4">
+                            <div class="w-14 h-14 rounded-xl bg-rose-900/40 border border-rose-500/30 flex items-center justify-center text-rose-400 text-2xl flex-shrink-0">
+                                <i class="fa-solid fa-shield-virus"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-white mb-1 hover:text-rose-300 transition-colors cursor-pointer" onclick="openProductModal('cybershield')">CyberShield Linux</h3>
+                                <p class="text-xs text-slate-400 font-mono">Monitoreo de Kernel y Protección de Ejecutables</p>
+                            </div>
+                        </div>
+
+                        <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+                            Agente de ciberseguridad automatizado para servidores de compilación y producción. Incluye verificación de firmas GPG en tiempo real, detección de inyección e intrusiones mediante eBPF.
+                        </p>
+
+                        <!-- Tech Specs Pills -->
+                        <div class="flex flex-wrap gap-2 mb-6 text-xs">
+                            <span class="px-2.5 py-1 rounded-md bg-slate-900/90 border border-slate-800 text-slate-300 font-mono">eBPF Telemetry</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-900/90 border border-slate-800 text-slate-300 font-mono">Zero-Trust Agent</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-900/90 border border-slate-800 text-slate-300 font-mono">GPG Auto-Verification</span>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center gap-3">
+                        <button onclick="openProductModal('cybershield')" class="w-full sm:w-auto flex-1 py-2.5 px-4 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-semibold text-xs transition-colors flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-building-shield"></i> Solicitar Licencia Enterprise
+                        </button>
+                        <button onclick="openProductModal('cybershield')" class="w-full sm:w-auto py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700/80 text-slate-300 text-xs transition-colors flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-file-pdf"></i> Ficha Técnica
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECURITY POLICY & COMPLIANCE SECTION (INCORPORATING SPECIFIC DOC DATA) -->
+    <section id="security" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-panel rounded-3xl p-8 lg:p-12 border border-purple-500/20 relative overflow-hidden">
+                <!-- Background Accent Glow -->
+                <div class="absolute -right-20 -bottom-20 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="max-w-3xl mb-12">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-purple-900/50 border border-purple-500/30 text-purple-300 text-xs font-mono mb-4">
+                        <i class="fa-solid fa-lock"></i> POLÍTICA ESTÁNDAR DE SEGURIDAD TURLUX
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+                        Software Seguro por Diseño y Cadena de Suministro Protegida
+                    </h2>
+                    <p class="text-slate-300 text-base leading-relaxed">
+                        En cumplimiento con la <em>Política Interna de Seguridad Informática de TurLux Games & Software S.A.</em>, garantizamos la integridad de cada paquete de software antes de su distribución digital.
+                    </p>
+                </div>
+
+                <!-- Security Feature Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                    <div class="bg-slate-900/70 p-6 rounded-2xl border border-slate-800">
+                        <div class="w-10 h-10 rounded-lg bg-emerald-950/80 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-4 text-lg">
+                            <i class="fa-solid fa-key"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white mb-2">Firmado Digital GPG</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">
+                            Todos los ejecutables y paquetes distribuidos están firmados digitalmente mediante claves criptográficas privadas de 4096-bit aisladas con autenticación 2FA estricta.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-900/70 p-6 rounded-2xl border border-slate-800">
+                        <div class="w-10 h-10 rounded-lg bg-purple-950/80 border border-purple-500/30 flex items-center justify-center text-purple-400 mb-4 text-lg">
+                            <i class="fa-solid fa-diagram-project"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white mb-2">CI/CD & Análisis Estático</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">
+                            Nuestra cadena de integración continua somete cada commit a escaneo estático de código para evitar inyección de malware y prevenir la inclusión accidental de secretos.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-900/70 p-6 rounded-2xl border border-slate-800">
+                        <div class="w-10 h-10 rounded-lg bg-blue-950/80 border border-blue-500/30 flex items-center justify-center text-blue-400 mb-4 text-lg">
+                            <i class="fa-solid fa-database"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white mb-2">Respaldo y Cifrado Remoto</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">
+                            Respaldos incrementales diarios cifrados fuera de sede y simulacros periódicos de restauración para garantizar disponibilidad total de repositorios.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Verification Banner -->
+                <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-certificate text-emerald-400 text-2xl"></i>
+                        <div>
+                            <div class="text-xs font-mono text-slate-200">Clave Pública GPG de TurLux S.A.</div>
+                            <div class="text-[11px] font-mono text-slate-400 break-all">Fingerprint: 4F91 A20E 87BC 9931 54D2  110A 773B 229F E88B E51D</div>
+                        </div>
+                    </div>
+                    <button onclick="copyRepoCommand('curl -s https://repo.turlux.com/turlux-gpg.key | gpg --import')" class="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-mono transition-colors flex items-center gap-2 shrink-0">
+                        <i class="fa-solid fa-copy"></i> Importar Clave GPG
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- TERMINAL / ECOSYSTEM INSTALLATION DEMO -->
+    <section id="ecosystem" class="py-20 bg-slate-950/60 border-t border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Text -->
+                <div class="lg:col-span-5">
+                    <div class="text-xs font-mono text-purple-400 uppercase tracking-widest mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-terminal"></i> Repositorio Central TurLux
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-6">
+                        Instalación rápida mediante tu gestor de paquetes preferido
+                    </h2>
+                    <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+                        Integramos nuestros repositorios con las principales distribuciones como <strong>Ubuntu, Linux Mint, Zorin OS, Fedora, Arch y Debian</strong>. Puedes instalar mediante PPA, Flatpak o AppImage nativo.
+                    </p>
+
+                    <!-- Distro Badges -->
+                    <div class="flex flex-wrap items-center gap-4 pt-2">
+                        <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs text-slate-300 font-medium">
+                            <i class="fa-brands fa-ubuntu text-orange-500"></i> Ubuntu PPA
+                        </div>
+                        <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs text-slate-300 font-medium">
+                            <i class="fa-solid fa-leaf text-emerald-400"></i> Linux Mint
+                        </div>
+                        <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs text-slate-300 font-medium">
+                            <i class="fa-solid fa-z text-blue-400"></i> Zorin OS
+                        </div>
+                        <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs text-slate-300 font-medium">
+                            <i class="fa-solid fa-box text-purple-400"></i> Flathub
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Interactive Terminal Mockup -->
+                <div class="lg:col-span-7">
+                    <div class="rounded-2xl bg-slate-900 border border-slate-700/80 shadow-2xl overflow-hidden font-mono text-sm">
+                        <!-- Terminal Top Bar -->
+                        <div class="bg-slate-950 px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-rose-500 inline-block"></span>
+                                <span class="w-3 h-3 rounded-full bg-amber-500 inline-block"></span>
+                                <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
+                                <span class="text-xs text-slate-400 ml-2">bash - turlux-installer@linux-desktop:~</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-xs">
+                                <button onclick="switchTerminalTab('apt')" id="tab-apt" class="terminal-tab px-2.5 py-1 rounded bg-purple-900/60 text-purple-200 border border-purple-500/30">APT / Debian</button>
+                                <button onclick="switchTerminalTab('flatpak')" id="tab-flatpak" class="terminal-tab px-2.5 py-1 rounded bg-slate-800 text-slate-400 hover:text-white">Flatpak</button>
+                                <button onclick="switchTerminalTab('arch')" id="tab-arch" class="terminal-tab px-2.5 py-1 rounded bg-slate-800 text-slate-400 hover:text-white">Arch (AUR)</button>
+                            </div>
+                        </div>
+
+                        <!-- Terminal Body -->
+                        <div class="p-6 text-slate-300 space-y-4 custom-scrollbar overflow-x-auto min-h-[260px] bg-slate-950/90">
+                            <!-- APT Section -->
+                            <div id="content-apt" class="terminal-content">
+                                <div class="text-slate-500"># 1. Agregar el repositorio de TurLux Games & Software S.A.</div>
+                                <div class="flex items-center gap-2 text-emerald-400">
+                                    <span class="text-purple-400">user@turlux-linux:~$</span>
+                                    <span>sudo add-apt-repository ppa:turlux-sa/stable</span>
+                                </div>
+                                <div class="text-slate-500"># 2. Actualizar índices e instalar motor o juegos</div>
+                                <div class="flex items-center gap-2 text-emerald-400">
+                                    <span class="text-purple-400">user@turlux-linux:~$</span>
+                                    <span>sudo apt update && sudo apt install turlux-gameengine stellarblade</span>
+                                </div>
+                                <div class="text-slate-400 text-xs pt-2">
+                                    [OK] Verificando clave GPG corporativa... <span class="text-emerald-400">VÁLIDO</span><br>
+                                    [OK] Descargando 2.4 GB (Paquete nativo compilado con Vulkan 1.3)...
+                                </div>
+                            </div>
+
+                            <!-- Flatpak Section -->
+                            <div id="content-flatpak" class="terminal-content hidden">
+                                <div class="text-slate-500"># Instalar desde el canal oficial de Flathub</div>
+                                <div class="flex items-center gap-2 text-emerald-400">
+                                    <span class="text-purple-400">user@turlux-linux:~$</span>
+                                    <span>flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo</span>
+                                </div>
+                                <div class="flex items-center gap-2 text-emerald-400">
+                                    <span class="text-purple-400">user@turlux-linux:~$</span>
+                                    <span>flatpak install flathub com.turlux.StellarBlade</span>
+                                </div>
+                                <div class="text-slate-400 text-xs pt-2">
+                                    Instalando runtime de gráficos Freedesktop 23.08... Listo.
+                                </div>
+                            </div>
+
+                            <!-- Arch Section -->
+                            <div id="content-arch" class="terminal-content hidden">
+                                <div class="text-slate-500"># Instalar desde el repositorio mantenido en AUR</div>
+                                <div class="flex items-center gap-2 text-emerald-400">
+                                    <span class="text-purple-400">user@archlinux:~$</span>
+                                    <span>yay -S turlux-gameengine-bin</span>
+                                </div>
+                                <div class="text-slate-400 text-xs pt-2">
+                                    ==> Validando fuentes PKGBUILD... <span class="text-emerald-400">Firma GPG aprobada</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Terminal Footer -->
+                        <div class="bg-slate-950/80 px-4 py-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+                            <span class="flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-emerald-400"></i> Repositorio Autenticado
+                            </span>
+                            <button onclick="copyCurrentTerminalCommand()" class="text-purple-400 hover:text-purple-300 font-medium flex items-center gap-1.5">
+                                <i class="fa-solid fa-copy"></i> Copiar Comando
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT COMPANY SECTION -->
+    <section id="about" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="text-xs font-mono text-emerald-400 uppercase tracking-widest mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-building"></i> Acerca de TurLux Games & Software S.A.
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-6">
+                        Impulsando el ecosistema de software y gaming libre en Linux
+                    </h2>
+                    <p class="text-slate-300 text-base mb-4 leading-relaxed">
+                        Somos una empresa tecnológica especializada en la creación de aplicaciones a medida, motores gráficos de alto desempeño y distribución de software de producción sin depender de capas de compatibilidad complejas.
+                    </p>
+                    <p class="text-slate-400 text-sm mb-6 leading-relaxed">
+                        Nuestra arquitectura técnica garantiza que los usuarios de distros como Ubuntu, Linux Mint y Zorin OS disfruten de una experiencia fluida, eficiente en recursos y con la tranquilidad de contar con estándares de seguridad estrictos en cada línea de código.
+                    </p>
+
+                    <!-- User Role Badges -->
+                    <div class="border-t border-slate-800 pt-6">
+                        <h4 class="text-xs font-mono text-slate-400 mb-3">PERFILES DE ACCESO Y ENTORNOS INTERNOS</h4>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
+                            <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">
+                                <i class="fa-solid fa-code text-purple-400 mr-1.5"></i> Programadores
+                            </div>
+                            <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">
+                                <i class="fa-solid fa-palette text-emerald-400 mr-1.5"></i> Artistas y Diseño
+                            </div>
+                            <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">
+                                <i class="fa-solid fa-server text-blue-400 mr-1.5"></i> SysAdmins Auditados
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-2xl p-8 border border-slate-800 space-y-6">
+                    <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-shield-halved text-purple-400"></i> Objetivos de Seguridad Corporativa
+                    </h3>
+
+                    <div class="flex items-start gap-4">
+                        <div class="w-8 h-8 rounded-lg bg-purple-950 border border-purple-500/30 flex items-center justify-center text-purple-400 text-sm shrink-0 mt-1">
+                            <i class="fa-solid fa-eye"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-slate-200">Confidencialidad Extrema</h4>
+                            <p class="text-xs text-slate-400">Activos digitales y propiedad intelectual accesibles únicamente por personal explícitamente autorizado mediante 2FA.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-950 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-sm shrink-0 mt-1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-slate-200">Integridad de Código Source</h4>
+                            <p class="text-xs text-slate-400">Revisión por pares obligatoria y bloqueo de commits sin firmar antes de consolidar en repositorios principales.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <div class="w-8 h-8 rounded-lg bg-blue-950 border border-blue-500/30 flex items-center justify-center text-blue-400 text-sm shrink-0 mt-1">
+                            <i class="fa-solid fa-arrows-rotate"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-slate-200">Alta Disponibilidad</h4>
+                            <p class="text-xs text-slate-400">Infraestructura de servidores de descargas Git con redundancia geográfica y respuesta rápida ante incidentes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 border-t border-slate-800 py-12 text-slate-400 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                
+                <!-- Col 1 -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-purple-600 to-emerald-400 flex items-center justify-center text-slate-950 font-black text-sm">
+                            <i class="fa-solid fa-brands fa-linux"></i>
+                        </div>
+                        <span class="font-bold text-base text-white">TurLux Games & Software S.A.</span>
+                    </div>
+                    <p class="text-slate-400 leading-relaxed">
+                        Desarrollo de software y producción de videojuegos nativos para sistemas operativos Linux.
+                    </p>
+                    <p class="font-mono text-[11px] text-slate-500">
+                        Razón Social: TurLux Games & Software S.A.
+                    </p>
+                </div>
+
+                <!-- Col 2 -->
+                <div>
+                    <h4 class="font-bold text-slate-200 mb-4 text-sm">Productos</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="#products" onclick="openProductModal('engine')" class="hover:text-emerald-400 transition-colors">TurLux OS / GameEngine</a></li>
+                        <li><a href="#products" onclick="openProductModal('stellarblade')" class="hover:text-emerald-400 transition-colors">StellarBlade: Linux Warfare</a></li>
+                        <li><a href="#products" onclick="openProductModal('pinguforge')" class="hover:text-emerald-400 transition-colors">PinguForge Studio IDE</a></li>
+                        <li><a href="#products" onclick="openProductModal('cybershield')" class="hover:text-emerald-400 transition-colors">CyberShield Linux Security</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3 -->
+                <div>
+                    <h4 class="font-bold text-slate-200 mb-4 text-sm">Seguridad y Políticas</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="#security" class="hover:text-purple-400 transition-colors">Política de Accesos (2FA & SSH)</a></li>
+                        <li><a href="#security" class="hover:text-purple-400 transition-colors">Desarrollo Seguro y Git Secrets</a></li>
+                        <li><a href="#security" class="hover:text-purple-400 transition-colors">Gestión de Copias de Seguridad</a></li>
+                        <li><a href="#security" class="hover:text-purple-400 transition-colors">Respuesta a Incidentes</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4 -->
+                <div>
+                    <h4 class="font-bold text-slate-200 mb-4 text-sm">Distribuciones Recomendadas</h4>
+                    <div class="flex flex-wrap gap-2 text-[11px]">
+                        <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800">Ubuntu 22.04+</span>
+                        <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800">Linux Mint 21+</span>
+                        <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800">Zorin OS 17+</span>
+                        <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800">Arch Linux</span>
+                        <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800">Debian 12</span>
+                        <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800">Fedora 38+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-900 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p>&copy; 2026 TurLux Games & Software S.A. Todos los derechos reservados.</p>
+                <div class="flex items-center gap-4 text-slate-400 text-lg">
+                    <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-gitlab"></i></a>
+                    <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-discord"></i></a>
+                    <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- PRODUCT DETAIL MODAL -->
+    <div id="productModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+        <div class="glass-panel w-full max-w-2xl rounded-2xl border border-slate-700/80 p-6 sm:p-8 relative max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <!-- Close Modal Button -->
+            <button onclick="closeProductModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Modal Dynamic Content -->
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- NOTIFICATION TOAST -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 hidden px-4 py-3 rounded-xl bg-purple-900 text-purple-100 border border-purple-500/40 shadow-2xl text-xs font-mono items-center gap-3">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
+        <span id="toastMessage">Comando copiado al portapapeles</span>
+    </div>
+
+    <!-- JAVASCRIPT INTERACTION LOGIC -->
+        <script src="js/script.js" defer></script>
+</body>
+</html>
